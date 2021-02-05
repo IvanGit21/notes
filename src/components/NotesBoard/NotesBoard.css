@@ -1,0 +1,17 @@
+.board__container{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 20px 10px;
+}
+
+.board__button_type_add{
+  height: 40px;
+}
+
+.board__input{
+  height: 30px;
+  margin-top: 20px;
+  border:1px solid black;
+  padding: 5px;
+}

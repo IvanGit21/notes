@@ -1,0 +1,10 @@
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: gray;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  font-family: "Inter", sans-serif;
+  font-weight: normal;
+  color: black;
+}
