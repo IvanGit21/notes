@@ -2,10 +2,12 @@
   border: 1px solid black;
   padding: 5px;
   height: 40px;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   white-space: normal;
   overflow: hidden;
   margin-top: 10px;
+  cursor: pointer;
+  position: relative;
 }
 .note__title {
   font-size: 18px;
@@ -15,4 +17,17 @@
 }
 .note__text {
   margin: 0;
+}
+
+.note__close-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: none;
+}
+
+.note__container:hover .note__close-icon {
+  display: block;
 }
