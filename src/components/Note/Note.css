@@ -9,6 +9,9 @@
   cursor: pointer;
   position: relative;
 }
+.note__container_active{
+  border-color: blue;
+}
 .note__title {
   font-size: 18px;
   line-height: 24px;
@@ -30,4 +33,7 @@
 
 .note__container:hover .note__close-icon {
   display: block;
+}
+.note__container:hover{
+  border-color: blue;
 }

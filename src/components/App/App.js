@@ -12,11 +12,12 @@ function App() {
   const [isAddNotePopup, setIsAddNotePopup] = useState(false);
 
   const [selectNote, setSelectNote] = useState({
-    isOpen:false,
-    data:{
-      title:"",
-      text:""
-    }
+    isOpen: false,
+    data: {
+      title: "",
+      text: "",
+      i: "",
+    },
   });
 
   function closePopupAddNote() {
@@ -29,18 +30,27 @@ function App() {
     setNotes([...notes, data]);
   }
 
+
   function handleDeleteNote(index) {
     const newNotes = notes.filter((el, i) => {
       return notes[index] !== notes[i];
     });
     setNotes(newNotes);
+    setSelectNote(({
+      isOpen: false,
+      data: {
+        title: "",
+        text: "",
+        i: "",
+      },
+    }));
   }
 
-  function handleViewClick({title,text}) {
+  function handleViewClick({ title, text, i }) {
     setSelectNote({
-      isOpen:true,
-      data:{title,text}
-    })
+      isOpen: true,
+      data: { title, text, i },
+    });
   }
 
   return (
@@ -57,7 +67,7 @@ function App() {
           onDeleteNote={handleDeleteNote}
           onViewClick={handleViewClick}
         />
-        <ViewNotes note={selectNote}/>
+        <ViewNotes note={selectNote} onDeleteNote={handleDeleteNote} />
       </div>
     </>
   );

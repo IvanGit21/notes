@@ -2,6 +2,11 @@ import React from "react";
 import "./ViewNotes.css";
 
 function ViewNotes(props) {
+  
+  function handleDeleteClick() {
+    props.onDeleteNote(props.note.data.i)
+  }
+
   return (
     <div
       className={`view-notes__container ${
@@ -10,7 +15,7 @@ function ViewNotes(props) {
     >
       <div className="view-notes__nav">
         <button className="view-notes__button">Редактировать</button>
-        <button className="view-notes__button">Удалить</button>
+        <button className="view-notes__button" onClick={handleDeleteClick}>Удалить</button>
       </div>
       <div className="view-notes__content">
         <h1 className="view-notes__title">{props.note.data.title}</h1>
