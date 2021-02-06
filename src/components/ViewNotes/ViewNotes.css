@@ -1,0 +1,16 @@
+.view-notes__container{
+  padding: 30px;
+  border: 1px solid black;
+  display: none;
+}
+.view-notes__container_active{
+  display: block;
+}
+.view-notes__button{
+  width: 300px;
+  height: 40px;
+  margin-right: 20px;
+}
+.view-notes__content{
+  width: 620px;
+}
