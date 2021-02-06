@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import NotesBoard from "../NotesBoard/NotesBoard";
 import Popup from "../Popup/Popup";
+import ViewNotes from "../ViewNotes/ViewNotes";
 
 function App() {
   const [notes, setNotes] = useState([
@@ -9,6 +10,14 @@ function App() {
     { title: "title 2", text: "text 2" },
   ]);
   const [isAddNotePopup, setIsAddNotePopup] = useState(false);
+
+  const [selectNote, setSelectNote] = useState({
+    isOpen:false,
+    data:{
+      title:"",
+      text:""
+    }
+  });
 
   function closePopupAddNote() {
     setIsAddNotePopup(false);
@@ -27,6 +36,13 @@ function App() {
     setNotes(newNotes);
   }
 
+  function handleViewClick({title,text}) {
+    setSelectNote({
+      isOpen:true,
+      data:{title,text}
+    })
+  }
+
   return (
     <>
       <Popup
@@ -39,7 +55,9 @@ function App() {
           onButtonAddClick={handleButtonAddClick}
           notes={notes}
           onDeleteNote={handleDeleteNote}
+          onViewClick={handleViewClick}
         />
+        <ViewNotes note={selectNote}/>
       </div>
     </>
   );

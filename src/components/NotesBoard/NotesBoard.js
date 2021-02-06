@@ -24,7 +24,15 @@ function NotesBoard(props) {
       <p className="board__text">Сортировать по возрастанию</p>
       <div className="notes__container">
         {props.notes.map((el, i) => {
-          return <Note data={el} i={i} key={i} onDeleteNote={props.onDeleteNote} />;
+          return (
+            <Note
+              data={el}
+              i={i}
+              key={i}
+              onDeleteNote={props.onDeleteNote}
+              onViewClick={props.onViewClick}
+            />
+          );
         })}
       </div>
     </div>
