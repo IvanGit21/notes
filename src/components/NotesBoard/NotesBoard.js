@@ -4,7 +4,6 @@ import Note from "../Note/Note";
 import SelectSort from "../SelectSort/SelectSort";
 
 function NotesBoard(props) {
-
   function handleButtonAddClick() {
     props.onButtonAddClick();
   }
@@ -23,6 +22,8 @@ function NotesBoard(props) {
         type="text"
         name="sort-input"
         placeholder="Поиск..."
+        value={props.searchValue}
+        onChange={props.onSearchNotes}
       />
       <p className="board__text">
         Сортировать по{" "}
@@ -45,4 +46,4 @@ function NotesBoard(props) {
   );
 }
 
-export default NotesBoard; 
+export default NotesBoard;

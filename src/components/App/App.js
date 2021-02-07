@@ -10,6 +10,8 @@ function App() {
     { title: "title 2", text: "text 2", date: new Date() },
   ]);
 
+  const [filterNotes, setFilterNotes] = useState([]);
+
   const [isAddNotePopup, setIsAddNotePopup] = useState(false);
   const [selectNote, setSelectNote] = useState({
     isOpen: false,
@@ -20,8 +22,21 @@ function App() {
     },
   });
   const [selectEdit, setSelectEdit] = useState(false);
-
   const [value, setValue] = useState("ascending");
+  const [searchValue, setSearhValue] = useState("");
+
+  function handleSearchNotes(event) {
+    const data = event.target.value;
+    setSearhValue(data);
+    const newArr = searchNote(data);
+    setFilterNotes(newArr);
+  }
+
+  function searchNote(data) {
+    return notes.filter((el, i) => {
+      return el.title.includes(data);
+    });
+  }
 
   function handleChangeSelectSort(event) {
     setValue(event.target.value);
@@ -52,12 +67,19 @@ function App() {
   function handleSubmitNotes(data) {
     setNotes([...notes, data]);
   }
+  function handleDeleteFilterNote(index) {
+    const newNotes = filterNotes.filter((el, i) => {
+      return notes[index] !== notes[i];
+    });
+    setFilterNotes(newNotes);
+  }
 
   function handleDeleteNote(index) {
     const newNotes = notes.filter((el, i) => {
       return notes[index] !== notes[i];
     });
     setNotes(newNotes);
+    handleDeleteFilterNote(index);
     setSelectNote({
       isOpen: false,
       data: {
@@ -74,6 +96,16 @@ function App() {
       data: { title, text, i },
     });
   }
+  function handleEditClickFilterNotes(data) {
+    const newNotes = filterNotes.filter((el, index) => {
+      return notes[data.i] !== notes[index];
+    });
+    let newNote = filterNotes.filter((el, index) => {
+      return notes[data.i] === notes[index];
+    });
+    newNote = data;
+    setFilterNotes([...newNotes, newNote]);
+  }
 
   function handleEditClick(data) {
     const newNotes = notes.filter((el, index) => {
@@ -84,6 +116,7 @@ function App() {
     });
     newNote = data;
     setNotes([...newNotes, newNote]);
+    handleEditClickFilterNotes(data);
     setSelectEdit(false);
     setSelectNote({
       isOpen: true,
@@ -99,6 +132,14 @@ function App() {
     setSelectEdit(true);
   }
 
+  function selectNotes() {
+    if (searchValue) {
+      return filterNotes;
+    } else {
+      return notes;
+    }
+  }
+
   return (
     <>
       <Popup
@@ -108,12 +149,14 @@ function App() {
       />
       <div className="app-container">
         <NotesBoard
-          notes={notes}
+          notes={selectNotes()}
           value={value}
+          searchValue={searchValue}
           handleChange={handleChangeSelectSort}
           onButtonAddClick={handleButtonAddClick}
           onDeleteNote={handleDeleteNote}
           onViewClick={handleViewClick}
+          onSearchNotes={handleSearchNotes}
         />
         <ViewNotes
           note={selectNote}
