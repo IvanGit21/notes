@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import NotesBoard from "../NotesBoard/NotesBoard";
 import Popup from "../Popup/Popup";
 import ViewNotes from "../ViewNotes/ViewNotes";
 
 function App() {
-  const [notes, setNotes] = useState([
-    { title: "title 1", text: "text 1", date: new Date() },
-    { title: "title 2", text: "text 2", date: new Date() },
-  ]);
+  const [notes, setNotes] = useState([]);
 
   const [filterNotes, setFilterNotes] = useState([]);
 
   const [isAddNotePopup, setIsAddNotePopup] = useState(false);
+
   const [selectNote, setSelectNote] = useState({
     isOpen: false,
     data: {
@@ -22,8 +20,15 @@ function App() {
     },
   });
   const [selectEdit, setSelectEdit] = useState(false);
+
   const [value, setValue] = useState("ascending");
+
   const [searchValue, setSearhValue] = useState("");
+
+  useEffect(() => {
+    const storeNotes = JSON.parse(localStorage.getItem("notes"));
+    setNotes(storeNotes);
+  }, []);
 
   function handleSearchNotes(event) {
     const data = event.target.value;
@@ -66,7 +71,9 @@ function App() {
 
   function handleSubmitNotes(data) {
     setNotes([...notes, data]);
+    localStorage.setItem("notes", JSON.stringify([...notes, data]));
   }
+
   function handleDeleteFilterNote(index) {
     const newNotes = filterNotes.filter((el, i) => {
       return notes[index] !== notes[i];
@@ -79,6 +86,7 @@ function App() {
       return notes[index] !== notes[i];
     });
     setNotes(newNotes);
+    localStorage.setItem("notes", JSON.stringify(newNotes));
     handleDeleteFilterNote(index);
     setSelectNote({
       isOpen: false,
@@ -116,6 +124,7 @@ function App() {
     });
     newNote = data;
     setNotes([...newNotes, newNote]);
+    localStorage.setItem("notes", JSON.stringify([...newNotes, newNote]));
     handleEditClickFilterNotes(data);
     setSelectEdit(false);
     setSelectNote({
