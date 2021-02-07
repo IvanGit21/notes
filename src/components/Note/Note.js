@@ -7,7 +7,7 @@ function Note({ data: { title, text }, i, onDeleteNote, onViewClick }) {
     onDeleteNote(i);
   }
   function handleViewClick() {
-    onViewClick({ title: title, text: text });
+    onViewClick({ title: title, text: text, i: i });
   }
 
   return (

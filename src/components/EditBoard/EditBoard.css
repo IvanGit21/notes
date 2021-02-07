@@ -1,0 +1,23 @@
+.edit-board__container{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 580px;
+  border:1px solid black;
+  margin-top: 20px;
+}
+.edit-board__input{
+  width: 200px;
+  height: 30px;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+.edit-board__textarea{
+  height: 300px;
+  padding: 5px;
+}
+
+.edit-board__button{
+  width: 100px;
+  margin-bottom: 20px;
+}

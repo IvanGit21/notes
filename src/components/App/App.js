@@ -6,11 +6,11 @@ import ViewNotes from "../ViewNotes/ViewNotes";
 
 function App() {
   const [notes, setNotes] = useState([
-    { title: "title 1", text: "text 1" },
-    { title: "title 2", text: "text 2" },
+    { title: "title 1", text: "text 1", i: 0 },
+    { title: "title 2", text: "text 2", i: 1 },
   ]);
-  const [isAddNotePopup, setIsAddNotePopup] = useState(false);
 
+  const [isAddNotePopup, setIsAddNotePopup] = useState(false);
   const [selectNote, setSelectNote] = useState({
     isOpen: false,
     data: {
@@ -19,6 +19,7 @@ function App() {
       i: "",
     },
   });
+  const [selectEdit, setSelectEdit] = useState(false);
 
   function closePopupAddNote() {
     setIsAddNotePopup(false);
@@ -26,24 +27,24 @@ function App() {
   function handleButtonAddClick() {
     setIsAddNotePopup(true);
   }
+
   function handleSubmitNotes(data) {
     setNotes([...notes, data]);
   }
-
 
   function handleDeleteNote(index) {
     const newNotes = notes.filter((el, i) => {
       return notes[index] !== notes[i];
     });
     setNotes(newNotes);
-    setSelectNote(({
+    setSelectNote({
       isOpen: false,
       data: {
         title: "",
         text: "",
         i: "",
       },
-    }));
+    });
   }
 
   function handleViewClick({ title, text, i }) {
@@ -51,6 +52,30 @@ function App() {
       isOpen: true,
       data: { title, text, i },
     });
+  }
+
+  function handleEditClick(data) {
+    const newNotes = notes.filter((el, index) => {
+      return notes[data.i] !== notes[index];
+    });
+    let newNote = notes.filter((el, index) => {
+      return notes[data.i] === notes[index];
+    });
+    newNote = data;
+    setNotes([...newNotes, newNote]);
+    setSelectEdit(false);
+    setSelectNote({
+      isOpen: false,
+      data: {
+        title: "",
+        text: "",
+        i: "",
+      },
+    });
+  }
+
+  function handleSelectEdit() {
+    setSelectEdit(true);
   }
 
   return (
@@ -67,7 +92,13 @@ function App() {
           onDeleteNote={handleDeleteNote}
           onViewClick={handleViewClick}
         />
-        <ViewNotes note={selectNote} onDeleteNote={handleDeleteNote} />
+        <ViewNotes
+          note={selectNote}
+          onDeleteNote={handleDeleteNote}
+          onEditClick={handleEditClick}
+          selectEdit={selectEdit}
+          onOpenEdit={handleSelectEdit}
+        />
       </div>
     </>
   );
