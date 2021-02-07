@@ -6,8 +6,8 @@ import ViewNotes from "../ViewNotes/ViewNotes";
 
 function App() {
   const [notes, setNotes] = useState([
-    { title: "title 1", text: "text 1", i: 0 },
-    { title: "title 2", text: "text 2", i: 1 },
+    { title: "title 1", text: "text 1", date: new Date() },
+    { title: "title 2", text: "text 2", date: new Date() },
   ]);
 
   const [isAddNotePopup, setIsAddNotePopup] = useState(false);
@@ -20,6 +20,27 @@ function App() {
     },
   });
   const [selectEdit, setSelectEdit] = useState(false);
+
+  const [value, setValue] = useState("ascending");
+
+  function handleChangeSelectSort(event) {
+    setValue(event.target.value);
+    setNotes(sortList());
+  }
+
+  function sortList() {
+    if (value === "descending") {
+      return notes.sort((obj1, obj2) => {
+        return obj1.date - obj2.date;
+      });
+    } else if (value === "ascending") {
+      return notes.sort((obj1, obj2) => {
+        return obj2.date - obj1.date;
+      });
+    } else {
+      return notes;
+    }
+  }
 
   function closePopupAddNote() {
     setIsAddNotePopup(false);
@@ -65,11 +86,11 @@ function App() {
     setNotes([...newNotes, newNote]);
     setSelectEdit(false);
     setSelectNote({
-      isOpen: false,
+      isOpen: true,
       data: {
-        title: "",
-        text: "",
-        i: "",
+        title: data.title,
+        text: data.text,
+        i: data.i,
       },
     });
   }
@@ -87,8 +108,10 @@ function App() {
       />
       <div className="app-container">
         <NotesBoard
-          onButtonAddClick={handleButtonAddClick}
           notes={notes}
+          value={value}
+          handleChange={handleChangeSelectSort}
+          onButtonAddClick={handleButtonAddClick}
           onDeleteNote={handleDeleteNote}
           onViewClick={handleViewClick}
         />

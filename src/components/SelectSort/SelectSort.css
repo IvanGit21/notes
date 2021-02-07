@@ -1,0 +1,5 @@
+.select__container {
+  background-color: grey;
+  outline: 1px solid black;
+  appearance: none;
+}

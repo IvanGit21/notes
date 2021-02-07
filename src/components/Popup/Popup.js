@@ -25,7 +25,7 @@ function Popup(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.onSubmit({ title: title, text: text });
+    props.onSubmit({ title: title, text: text, date:new Date() });
     props.onClose();
     resetInput();
   }

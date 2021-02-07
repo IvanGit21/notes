@@ -1,11 +1,14 @@
 import React from "react";
 import "./NotesBoard.css";
 import Note from "../Note/Note";
+import SelectSort from "../SelectSort/SelectSort";
 
 function NotesBoard(props) {
+
   function handleButtonAddClick() {
     props.onButtonAddClick();
   }
+
   return (
     <div className="board__container">
       <button
@@ -21,7 +24,10 @@ function NotesBoard(props) {
         name="sort-input"
         placeholder="Поиск..."
       />
-      <p className="board__text">Сортировать по возрастанию</p>
+      <p className="board__text">
+        Сортировать по{" "}
+        {<SelectSort value={props.value} handleChange={props.handleChange} />}
+      </p>
       <div className="notes__container">
         {props.notes.map((el, i) => {
           return (
@@ -39,4 +45,4 @@ function NotesBoard(props) {
   );
 }
 
-export default NotesBoard;
+export default NotesBoard; 
