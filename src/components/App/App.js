@@ -26,8 +26,13 @@ function App() {
   const [searchValue, setSearhValue] = useState("");
 
   useEffect(() => {
-    const storeNotes = JSON.parse(localStorage.getItem("notes"));
-    setNotes(storeNotes);
+    if (localStorage.getItem("notes")) {
+      const storeNotes = JSON.parse(localStorage.getItem("notes"));
+      setNotes(storeNotes);
+    } else {
+      localStorage.setItem("notes", []);
+      setNotes([]);
+    }
   }, []);
 
   function handleSearchNotes(event) {
@@ -51,6 +56,7 @@ function App() {
   function sortList() {
     if (value === "descending") {
       return notes.sort((obj1, obj2) => {
+        debugger;
         return obj1.date - obj2.date;
       });
     } else if (value === "ascending") {
@@ -94,14 +100,15 @@ function App() {
         title: "",
         text: "",
         i: "",
+        date:""
       },
     });
   }
 
-  function handleViewClick({ title, text, i }) {
+  function handleViewClick({ title, text, i, date }) {
     setSelectNote({
       isOpen: true,
-      data: { title, text, i },
+      data: { title, text, i, date },
     });
   }
   function handleEditClickFilterNotes(data) {
@@ -133,6 +140,7 @@ function App() {
         title: data.title,
         text: data.text,
         i: data.i,
+        date:data.date
       },
     });
   }

@@ -3,10 +3,12 @@
   flex-direction: column;
   border: 1px solid black;
   padding: 20px 10px;
+  background-color: #2D495D;
 }
 
 .board__button_type_add{
   height: 40px;
+  border-radius: 5px;
 }
 
 .board__input{
@@ -14,4 +16,5 @@
   margin-top: 20px;
   border:1px solid black;
   padding: 5px;
+  border-radius: 5px;
 }

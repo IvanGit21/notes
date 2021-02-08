@@ -1,9 +1,10 @@
 .app-container {
   min-height: 100vh;
-  background-color: gray;
   display: grid;
   grid-template-columns: 1fr 3fr;
   font-family: "Inter", sans-serif;
   font-weight: normal;
+  outline: 1px solid black;
   color: black;
+  background-color: #DFDBD7;
 }

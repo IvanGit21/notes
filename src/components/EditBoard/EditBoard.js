@@ -23,6 +23,7 @@ function EditBoard(props) {
       title: inputValue,
       text: textareaValue,
       i: props.i,
+      date:new Date(),
     });
   }
 

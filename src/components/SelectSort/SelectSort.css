@@ -1,5 +1,8 @@
 .select__container {
-  background-color: grey;
-  outline: 1px solid black;
   appearance: none;
+  background-color: grey;
+  color:white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
 }

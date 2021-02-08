@@ -15,3 +15,7 @@
   max-width: 620px;
   word-wrap:break-word;
 }
+
+.view-notes__title{
+  border-bottom: 1px solid black;
+}
