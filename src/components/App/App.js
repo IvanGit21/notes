@@ -50,18 +50,17 @@ function App() {
 
   function handleChangeSelectSort(event) {
     setValue(event.target.value);
-    setNotes(sortList());
+    setNotes(sortList(event.target.value));
   }
 
-  function sortList() {
-    if (value === "descending") {
+  function sortList(val) {
+    if (val === "descending") {
       return notes.sort((obj1, obj2) => {
-        debugger;
-        return obj1.date - obj2.date;
+        return new Date(obj2.date) - new Date(obj1.date);
       });
-    } else if (value === "ascending") {
+    } else if (val === "ascending") {
       return notes.sort((obj1, obj2) => {
-        return obj2.date - obj1.date;
+        return new Date(obj1.date) - new Date(obj2.date);
       });
     } else {
       return notes;
@@ -100,7 +99,7 @@ function App() {
         title: "",
         text: "",
         i: "",
-        date:""
+        date: "",
       },
     });
   }
@@ -140,7 +139,7 @@ function App() {
         title: data.title,
         text: data.text,
         i: data.i,
-        date:data.date
+        date: data.date,
       },
     });
   }

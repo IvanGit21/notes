@@ -30,6 +30,7 @@ function ViewNotes(props) {
           title={props.note.data.title}
           text={props.note.data.text}
           i={props.note.data.i}
+          date={props.note.data.date}
           onEditClick={props.onEditClick}
         />
       ) : (
